@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Stepper } from '../../components/Stepper';
-import logo from '../../assets/logo.png';
+import { Stepper } from '../../components/institution-creation/Stepper';
 
+import { CreateInstitutionHeader } from '../../components/institution-creation/CreateInstitutionHeader';
 import { InstitutionDetailsStep } from '../../components/institution-creation/InstitutionDetailsStep';
 import { AdminStep } from '../../components/institution-creation/AdminStep';
 import { DomainSSOStep } from '../../components/institution-creation/DomainSSOStep';
@@ -47,21 +47,7 @@ const CreateInstitutionPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-(--bg-page) flex flex-col">
-            {/* Top Header */}
-            <header className="bg-white border-b border-(--border-card) px-6 py-4 lg:px-[224px] flex items-center justify-between sticky top-0 z-50">
-                <div className="flex items-center">
-                    <img src={logo} alt="ComplyNexus" className="h-[34px]" />
-                </div>
-                <div className="flex items-center gap-2">
-                    <span className="body-2 text-(--black-50)">Step {currentStep} of 5</span>
-                    <button
-                        onClick={() => navigate('/signup')}
-                        className="body-2 text-(--primary) font-(--weight-semibold) hover:underline"
-                    >
-                        Cancel
-                    </button>
-                </div>
-            </header>
+            <CreateInstitutionHeader currentStep={currentStep} totalSteps={steps.length} />
 
             {/* Progress Stepper */}
             <Stepper currentStep={currentStep} steps={steps} />
