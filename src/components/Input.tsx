@@ -9,18 +9,18 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   rightIcon?: React.ReactNode;
 }
 
-export const Input: React.FC<InputProps> = ({ 
-  label, 
-  error, 
-  hint, 
-  sizeVariant = 'medium', 
+export const Input: React.FC<InputProps> = ({
+  label,
+  error,
+  hint,
+  sizeVariant = 'medium',
   leftIcon,
   rightIcon,
-  className = '', 
-  ...props 
+  className = '',
+  ...props
 }) => {
   const baseInputStyles = "w-full bg-(--white) border border-(--black-25) transition-all outline-none focus:border-(--primary) focus:ring-1 focus:ring-(--primary-25) disabled:bg-(--grey-3) disabled:border-(--grey) disabled:text-(--black-50) placeholder:text-(--black-50)";
-  
+
   const sizes = {
     small: "h-9 text-(--body-3-size) rounded-(--radius-8)",
     medium: "h-12 text-(--body-2-size) rounded-(--radius-8)",
@@ -36,23 +36,24 @@ export const Input: React.FC<InputProps> = ({
   const inputClasses = `${baseInputStyles} ${sizes[sizeVariant]} ${paddingClasses[sizeVariant]} ${error ? 'border-(--red) focus:border-(--red)' : ''} ${className}`;
 
   return (
-    <div className="flex flex-col gap-1 w-full max-w-sm">
+    <div className="flex flex-col gap-2 w-full">
       {label && (
-        <label className="text-sm font-medium text-(--black-75) mb-1">
+        <label className="body-2 font-(--weight-medium) text-(--black-75)">
           {label}
+          {props.required && <span className="text-(--red) ml-0.5">*</span>}
         </label>
       )}
-      
+
       <div className="relative flex items-center">
         {leftIcon && (
           <div className="absolute left-3 flex items-center justify-center text-(--black-50)">
             {leftIcon}
           </div>
         )}
-        
-        <input 
-          className={inputClasses} 
-          {...props} 
+
+        <input
+          className={inputClasses}
+          {...props}
         />
 
         {rightIcon && (
@@ -63,13 +64,13 @@ export const Input: React.FC<InputProps> = ({
       </div>
 
       {error && (
-        <span className="text-xs text-(--red) mt-1">
+        <span className="body-3 text-(--red) mt-(--gap-8)">
           {error}
         </span>
       )}
-      
+
       {hint && !error && (
-        <span className="text-xs text-(--black-50) mt-1">
+        <span className="body-3 text-(--black-50) mt-(--gap-8)">
           {hint}
         </span>
       )}
